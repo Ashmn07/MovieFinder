@@ -37,6 +37,7 @@ function Landing() {
                 <div className="p-0 hidden lg:block lg:flex-1" style={landUrl}></div>
             </div>
         </div>
+        
     </div>
     )
 }

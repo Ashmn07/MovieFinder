@@ -1,8 +1,68 @@
-import React from 'react'
+import React,{useState} from 'react'
 import bgauth from '../images/bg-pop.jpg'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
+import {toast} from 'tailwind-toast'
 
 function Login() {
+
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const history = useHistory()    
+
+    const loginUser = (e) =>{
+        e.preventDefault()
+        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+            console.log("Invalid Email")
+            toast().danger().with({
+                title:'Invalid Email Format',
+                message:'',
+                color:"red",
+                tone:600,
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
+            return;
+        }
+        fetch("/login",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify({
+                password,
+                email
+            })
+        }).then(res=>res.json())
+        .then(data =>{
+            console.log(data)
+           if(data.err){
+                toast().danger().with({
+                    title:data.err,
+                    message:'',
+                    color:"red",
+                    tone:600,
+                    shape: 'square',
+                    positionX: 'end',
+                    positionY: 'top',
+                  }).show()
+            } 
+            else{
+                localStorage.setItem("jwt",data.token)
+                localStorage.setItem("user",JSON.stringify(data.user))
+               // dispatch({type:"USER",payload:data.user})
+                toast().success().with({
+                    title:'Log in Successful!',
+                    message:'',
+                    shape: 'square',
+                    positionX: 'end',
+                    positionY: 'top',
+                  }).show()
+                history.push('/home')
+            }
+        })
+    }
+
     const bgUrl = {
         background:`url(${bgauth})`,
         width:'30vw',
@@ -34,6 +94,8 @@ function Login() {
                         <input 
                         type="email" 
                         required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="my-1 form-input rounded-lg focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700" 
                         placeholder="Enter Email"
                         />
@@ -46,11 +108,15 @@ function Login() {
                     <input 
                     type="password" 
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="form-input rounded-lg my-1 focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700" 
                     placeholder="Enter Password"
                     />
                     </div>
-                    <button className="bg-red-500 hover:bg-red-700 text-white rounded mt-4 p-1 w-20">
+                    <button 
+                    className="bg-red-500 hover:bg-red-700 text-white rounded mt-4 p-1 w-20"
+                    onClick={(e)=>loginUser(e)}>
                         Log In
                     </button>
                 </form>
