@@ -1,6 +1,6 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import landing from '../images/land.jpg'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 
 function Landing() {
     const landUrl = {
@@ -10,6 +10,13 @@ function Landing() {
         backgroundRepeat:'no-repeat',
         backgroundSize: 'cover',
     }
+    const history = useHistory()
+    useEffect(()=>{
+        const user = JSON.parse(localStorage.getItem("user"))
+        if(user){
+            history.push('/home')
+        }
+      },[])
     return (
     <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 h-screen">
         <div className="bg-white rounded-lg flex h-3/5 w-3/4 md:w-3/4 lg:w-2/3 shadow-2xl">

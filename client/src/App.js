@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Landing from './components/Landing';
 import Home from './components/Home';
 import Movies from './components/Movies';
+import SearchMovie from './components/SearchMovie';
 
 export const UserContext = createContext()
 
@@ -36,6 +37,7 @@ function Routing() {
         <Route exact path="/" component={Landing}/>
         <Route exact path="/home" component={Home}/>
         <Route exact path="/movies" component={Movies} />
+        <Route exact path="/search" component={SearchMovie} />
         <Redirect to="/" />
       </Switch>
   );

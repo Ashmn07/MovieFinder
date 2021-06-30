@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import Card from './Card'
 import Navbar from './Navbar'
 import Footer from './Footer'
@@ -10,26 +10,30 @@ function Movies() {
   const [pageLimit,setPageLimit] = useState(1)
   const [details,setDetails] = useState()
   const [genres,setGenres] = useState([])
-  const [search,setSearch] = useState('')
-  const [result,setResult] = useState(1)
   const [selectedGenres,setSelectedGenres] = useState([])
+  const [selectedGenresIds,setSelectedGenresIds] = useState('')
 
   const API_KEY = "d6119874269137f5b378b66f7d37305d";
 
-  const trendingUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`
+  const fetchDetails = async () => {
+    const discoverUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${selectedGenresIds!==''?`&with_genres=${selectedGenresIds}`:''}&language=en-US&sort_by=popularity.desc&page=${page}`
+    const result = await fetch(discoverUrl)
+    const data = await result.json()
+    setDetails(data.results)
+    setPageLimit(data.total_results)
+  }
 
-  // const fetchDetails = async () => {
-  //   const result = await fetch(trendingUrl)
-  //   const data = await result.json()
-  //   // console.log(data)
-  //   setDetails(data.results)
-  //   setPageLimit(data.total_pages)
-  // }
+  useEffect(() => {
+    if(selectedGenres.length>0){
+    const tempIds = selectedGenres.map(genres => genres.id)
+    const ids = tempIds.reduce((curr,next)=>curr+","+next)
+    setSelectedGenresIds(ids)
+    }
+  },[selectedGenres])
 
-
-  // useEffect(() => {
-  //   console.log(details)
-  // },[details])
+  useEffect(() => {
+    page===1?fetchDetails():setPage(1)
+  },[selectedGenresIds])
 
 
   useEffect(() => {
@@ -45,26 +49,23 @@ function Movies() {
 
   
   useEffect(() => {
-    searchMovie()
+    fetchDetails()
 },[page])
-
-const searchHandler = () =>{
-  if(page === 1) searchMovie()
-  else setPage(1)
-}
-
-const searchMovie = async () => {
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&${search!=''?`query=${search}&`:``}page=${page}`
-    const result = await fetch(searchUrl)
-    const data = await result.json()
-    setResult(data.total_results)
-    setPageLimit(data.total_pages)
-    setDetails(data.results)
-  }
 
   const pageChangeHandler = (data) =>{
     setPage(data)
     window.scroll(0,0)
+  }
+
+  const handleGenre = (genre) => {
+    if(selectedGenres.includes(genre)){
+      setSelectedGenres(selectedGenres.filter(genres => genres.id!==genre.id))
+      setGenres([...genres,genre])
+    }
+    else{
+      setSelectedGenres([...selectedGenres,genre])
+      setGenres(genres.filter(genres => genres.id!==genre.id))
+    }
   }
 
     return (
@@ -73,26 +74,25 @@ const searchMovie = async () => {
           {/* <Banner banner={banner}/> */}
           <div className="pt-10"/>
           <span className="font-montserrat text-center p-3 mt-3 tracking-wider block text-white text-xl sm:text-4xl font-extrabold">DISCOVER MOVIES</span>
-          <div className="flex justify-center mt-5">
-            <div className="flex items-center justify-between w-9/10 md:w-3/4 lg:w-1/2 rounded-full bg-black">
-                <input 
-                className="flex-1 border-none outline-none mx-1 sm:mx-4 px-4 py-2 text-white bg-black" 
-                placeholder="Search Movie" value={search} onChange={e=>setSearch(e.target.value)}
-                // onSubmit={()=>setPage(1)}
-                />
-                <div className="p-4 w-auto">
-                <svg onClick={searchHandler} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600 cursor-pointer hover:text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                </div>
-            </div>
-        </div>
+          <div className="flex justify-center mt-5"/>
         <div className="relative">
-          <div className="mt-10 flex items-center px-10 sm:px-20 text-base sm:text-lg whitespace-nowrap space-x-4 sm:space-x-8 overflow-x-scroll scrollbar-hide">
+          <div className="flex items-center px-10 sm:px-20 text-base sm:text-lg whitespace-nowrap space-x-3 sm:space-x-6 overflow-x-scroll scrollbar-hide">
+            {
+              selectedGenres.map(selGenre =>(
+                <h2 
+                key={selGenre.id}
+                onClick={()=>handleGenre(selGenre)}
+                className="px-3 py-1 sm:px-4 cursor-pointer text-white rounded-full transition duration-100 transform  bg-red-600 hover:bg-red-800"
+                >
+                  {selGenre.name}
+                </h2> 
+              ))
+            }
             {
               genres.map((genre)=>(
               <h2 
               key={genre.id}
+              onClick={()=>handleGenre(genre)}
               className="last:pr-24 px-3 py-1 sm:px-4 cursor-pointer text-white rounded-full transition duration-100 transform  bg-gray-600 hover:bg-gray-800"
               >
                 {genre.name}
@@ -100,21 +100,21 @@ const searchMovie = async () => {
               ))
             }
           </div>
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-bgGray h-20 w-1/12"/>
+          <div className="absolute top-0 right-0 bg-gradient-to-l from-bgGray h-20 w-1/6" />
         </div>
           <div className="flex justify-center mb-4">
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {
-                details?details.map(detail => (
+                details?details.length!==0?details.map(detail => (
                   <Card detail={detail} key={detail.id}/>
-                )):null
+                )):<span className="text-center text-red-600 text-2xl">No Results Available for given selection</span>:null
               }
             </div>
           </div>
-         {details?<Paging pageChangeHandler={pageChangeHandler} result={result} page={page}/>:null}
+         {(details && pageLimit>20)?<Paging pageChangeHandler={pageChangeHandler} result={pageLimit} page={page}/>:null}
           <Footer/>
         </div>
     )
-}
+  }
 
 export default Movies
