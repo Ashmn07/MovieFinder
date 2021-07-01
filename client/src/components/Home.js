@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import Card from './Card'
+import MovieCard from './MovieCard'
 import Navbar from './Navbar'
 import Banner from './Banner'
 import Footer from './Footer'
@@ -44,7 +44,7 @@ function Home() {
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {
                 details?details.map(detail => (
-                  <Card detail={detail} key={detail.id}/>
+                  <MovieCard detail={detail} key={detail.id}/>
                 )):null
               }
             </div>

@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import MovieCard from './MovieCard'
+import TVCard from './TVCard'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Paging from './Paging'
 
-function SearchMovie() {
+function SearchTV() {
   const [search,setSearch] = useState('')
   const [page,setPage] = useState(1)
   const [details,setDetails] = useState()
@@ -15,18 +15,18 @@ function SearchMovie() {
  
 useEffect(() => {
     if(search!==''){
-        searchMovie()
+        searchTV()
     }
 },[page])
 
 const searchHandler = (e) =>{
   e.preventDefault()
-  if(page === 1) searchMovie()
+  if(page === 1) searchTV()
   else setPage(1)
 }
 
-const searchMovie = async () => {
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&${search!=''?`query=${search}&`:``}page=${page}`
+const searchTV = async () => {
+    const searchUrl = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&${search!=''?`query=${search}&`:``}page=${page}`
     const result = await fetch(searchUrl)
     const data = await result.json()
     setResult(data.total_results)
@@ -41,16 +41,14 @@ const pageChangeHandler = (data) =>{
     return (
         <div className="bg-bgGray h-full w-full min-h-screen">
           <Navbar/> 
-          {/* <Banner banner={banner}/> */}
           <div className="pt-10"/>
-          <span className="font-montserrat text-center p-3 mt-3 tracking-wider block text-white text-xl sm:text-4xl font-extrabold">SEARCH MOVIES</span>
+          <span className="font-montserrat text-center p-3 mt-3 tracking-wider block text-white text-xl sm:text-4xl font-extrabold">SEARCH TV SHOWS</span>
           <div className="flex justify-center mt-5">
             <div className="flex items-center justify-between w-9/10 md:w-3/4 lg:w-1/2 rounded-full bg-black">
                 <form onSubmit={searchHandler}>
                   <input 
                   className="flex-1 border-none outline-none mx-1 sm:mx-4 px-4 py-2 text-white bg-black" 
-                  placeholder="Search Movie" value={search} onChange={e=>setSearch(e.target.value)}
-                  // onSubmit={()=>setPage(1)}
+                  placeholder="Search TV Shows" value={search} onChange={e=>setSearch(e.target.value)}
                   />
                 </form>
                 <div className="p-4 w-auto">
@@ -64,7 +62,7 @@ const pageChangeHandler = (data) =>{
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {
                 details?details.map(detail => (
-                  <MovieCard detail={detail} key={detail.id}/>
+                  <TVCard detail={detail} key={detail.id}/>
                 )):null
               }
             </div>
@@ -75,4 +73,4 @@ const pageChangeHandler = (data) =>{
     )
 }
 
-export default SearchMovie
+export default SearchTV

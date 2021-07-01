@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useHistory,Link} from 'react-router-dom'
 import { UserContext } from '../App'
 
 function Navbar() {
@@ -31,7 +31,7 @@ function Navbar() {
 
     return (
         <>
-        <nav className={`${show?'bg-black':'bg-gradient-to-b from-black'} fixed w-screen`}>
+        <nav className={`${show?'bg-black':'bg-gradient-to-b from-black'} fixed w-screen z-10`}>
         <div className="mx-4 md:mx-6 md:my-1">
           <div className="flex justify-between p-1">
             <div className="flex space-x-8 md:space-x-6">
@@ -44,11 +44,11 @@ function Navbar() {
                 </svg>
                 <span className="text-center text-red-600 font-bold ml-1 text-lg lg:text-xl">MovieFinder</span>
               </div>
-              <div className="hidden md:flex items-center space-x-4 md:space-x-2">
-                <span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Home</span>
-                <span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Movies</span>
-                <span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">TV Shows</span>
-                <span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">My Watch List</span>
+              <div className="hidden sm:flex items-center space-x-4 md:space-x-2">
+                <Link to="/home"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Home</span></Link>
+                <Link to="/movies"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Movies</span></Link>
+                <Link to="/tv"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">TV Shows</span></Link>
+                <Link to=""><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">My Watch List</span></Link>
               </div>
             </div>
             <div className="flex items-center mr-2">

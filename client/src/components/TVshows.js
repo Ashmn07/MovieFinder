@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import MovieCard from './MovieCard'
+import TVCard from './TVCard'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Paging from './Paging'
 
-function Movies() {
+function TVshows() {
 
   const [page,setPage] = useState(1)
   const [pageLimit,setPageLimit] = useState(1)
@@ -17,9 +17,10 @@ function Movies() {
   const API_KEY = "d6119874269137f5b378b66f7d37305d";
 
   const fetchDetails = async () => {
-    const discoverUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${selectedGenresIds!==''?`&with_genres=${selectedGenresIds}`:''}&language=en-US&sort_by=popularity.desc&page=${page}`
+    const discoverUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}${selectedGenresIds!==''?`&with_genres=${selectedGenresIds}`:''}&language=en-US&sort_by=popularity.desc&page=${page}`
     const result = await fetch(discoverUrl)
     const data = await result.json()
+    console.log(data)
     setDetails(data.results)
     setPageLimit(data.total_results)
   }
@@ -38,11 +39,10 @@ function Movies() {
 
 
   useEffect(() => {
-    const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+    const genresUrl = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`
     const fetchGenres = async () => {
         const result = await fetch(genresUrl)
         const data = await result.json()
-        console.log(data)
         setGenres(data.genres)
     }
     fetchGenres()
@@ -75,8 +75,8 @@ function Movies() {
           {/* <Banner banner={banner}/> */}
           <div className="pt-10"/>
           <div className="flex justify-between items-center p-3 mt-8 mx-6 sm:mx-16">
-          <span className="font-montserrat text-center tracking-wider block text-white text-lg sm:text-4xl font-extrabold">DISCOVER MOVIES</span>
-          <Link to="/searchmovie">
+          <span className="font-montserrat text-center tracking-wider block text-white text-lg sm:text-4xl font-extrabold">DISCOVER TV SHOWS</span>
+          <Link to="/searchtv">
             <div className="flex py-1 px-1 sm:px-3 bg-bgGray border-2 border-red-600 text-red-600  items-center hover:text-bgGray hover:bg-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -117,15 +117,15 @@ function Movies() {
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {
                 details?details.length!==0?details.map(detail => (
-                  <MovieCard detail={detail} key={detail.id}/>
+                  <TVCard detail={detail} key={detail.id}/>
                 )):<span className="text-center text-red-600 text-2xl">No Results Available for given selection</span>:null
               }
             </div>
           </div>
-         {(details && pageLimit>20)?<Paging pageChangeHandler={pageChangeHandler} result={pageLimit} page={page}/>:null}
+         {(details)?<Paging pageChangeHandler={pageChangeHandler} result={pageLimit} page={page}/>:null}
           <Footer/>
         </div>
     )
   }
 
-export default Movies
+export default TVshows
