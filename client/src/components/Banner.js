@@ -3,7 +3,7 @@ import React from 'react'
 function Banner({banner}) {
 
     const bannerStyle = {
-        backgroundImage: `url("https://image.tmdb.org/t/p/original/${banner?.backdrop_path}")`,
+        backgroundImage: `linear-gradient(0deg, rgba(20,20,20,1) 4%, rgba(20,20,20,0.46) 100%),url("https://image.tmdb.org/t/p/original/${banner?.backdrop_path}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -27,7 +27,7 @@ function Banner({banner}) {
             {truncate(banner?.overview, 150)} 
           </div>
         </div>  
-        <div className="bg-gradient-to-t from-black h-5" />
+        {/* <div className="bg-gradient-to-t from-black h-5" /> */}
         </div>
     )
 }

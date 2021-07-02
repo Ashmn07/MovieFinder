@@ -8,6 +8,7 @@ module.exports = {
       fontFamily:{ 
         sans: ['Comic Sans', ...defaultTheme.fontFamily.sans],
         montserrat: ['Montserrat'],
+        roboto:['Roboto'],
       },
       colors:{
         bgGray:"#141414",

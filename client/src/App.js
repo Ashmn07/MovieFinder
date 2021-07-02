@@ -10,6 +10,8 @@ import Movies from './components/Movies';
 import SearchMovie from './components/SearchMovie';
 import TVshows from './components/TVshows';
 import SearchTV from './components/SearchTV';
+import MovieDetails from './components/MovieDetails';
+import TVDetails from './components/TVDetails';
 
 export const UserContext = createContext()
 
@@ -39,7 +41,9 @@ function Routing() {
         <Route exact path="/" component={Landing}/>
         <Route exact path="/home" component={Home}/>
         <Route exact path="/movies" component={Movies} />
+        <Route exact path="/movie/:movieId" component={MovieDetails}/>
         <Route exact path="/tv" component={TVshows} />
+        <Route exact path="/tv/:tvId" component={TVDetails}/>
         <Route exact path="/searchmovie" component={SearchMovie} />
         <Route exact path="/searchtv" component={SearchTV} />
         <Redirect to="/" />

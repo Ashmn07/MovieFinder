@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function MovieCard({detail}) {
     let imgSrc;
@@ -9,7 +10,8 @@ function MovieCard({detail}) {
       imgSrc = 'https://www.movienewz.com/img/films/poster-holder.jpg'
     }
     return (
-    <div className="rounded shadow-card w-32 md:w-72 my-10 sm:mx-7 mx-3 flex flex-col justify-evenly">
+    <div className="rounded shadow-card w-32 md:w-72 my-10 sm:mx-7 mx-3 flex flex-col justify-evenly transition duration-100 cursor-pointer transform hover:scale-105">
+      <Link to={`/movie/${detail.id}`}>
         <img src={imgSrc}
         alt={detail?.original_title}
         className="w-32 md:w-72"
@@ -25,6 +27,7 @@ function MovieCard({detail}) {
             </span>
           </div>
         </div>
+        </Link>
       </div>
     )
 }
