@@ -8,7 +8,7 @@ const MONGOURI = "mongodb+srv://Admin:iWVuy66GhQkq1VfI@cluster0.1fyyg.mongodb.ne
 require('./models/users');
 
 app.use(express.json())
-app.use(require('./routes/auth'));
+app.use(require('./routes'));
 
 mongoose.connect(MONGOURI,{
     useNewUrlParser: true,

@@ -31,6 +31,14 @@ function TVDetails({match}) {
         fetchMovie()
     },[match.params.movieId])
 
+    if (!tv) return(
+        <div
+        className="flex justify-center items-center h-screen bg-bgGray text-white text-2xl"
+        >
+          <h1>Loading...</h1>
+        </div>
+    );
+
     return (
         <div className="bg-bgGray h-full w-full min-h-screen">
             <Navbar/>

@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     waitList:[{
-        type:String,
+        entName:String,
+        entType:String,
+        entYear:String,
+        entRating:Number,
+        entId:String,
     }]
 })
 

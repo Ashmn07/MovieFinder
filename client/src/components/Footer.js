@@ -28,7 +28,7 @@ function Footer() {
                     <span className="text-red-600">Tv Shows</span>
                 </div>
             </Link>
-            <Link to="/home">
+            <Link to="/list">
                 <div className="flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />

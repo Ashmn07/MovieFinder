@@ -1,11 +1,11 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {useHistory,Link} from 'react-router-dom'
-import { UserContext } from '../App'
+// import { UserContext } from '../App'
 
 function Navbar() {
     const [show,setShow] = useState(false)
     const history = useHistory()
-    const {state,dispatch} = useContext(UserContext)
+    // const {state,dispatch} = useContext(UserContext)
     
     const navChange = () => {
         if (window.scrollY > 80) {
@@ -25,7 +25,7 @@ function Navbar() {
       const logoutHandler = (e) => {
           e.preventDefault();
           localStorage.clear()
-          dispatch({type:"CLEAR"})
+          // dispatch({type:"CLEAR"})
           history.push('/')
       }
 
@@ -48,7 +48,7 @@ function Navbar() {
                 <Link to="/home"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Home</span></Link>
                 <Link to="/movies"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Movies</span></Link>
                 <Link to="/tv"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">TV Shows</span></Link>
-                <Link to=""><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">My Watch List</span></Link>
+                <Link to="/list"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">My Watch List</span></Link>
               </div>
             </div>
             <div className="flex items-center mr-2">
