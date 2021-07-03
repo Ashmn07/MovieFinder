@@ -1,10 +1,36 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { UserContext } from '../App'
 
 function MovieDetails({match}) {
     const [movie,setMovie] = useState()
     const [cast,setCast] = useState()
+    const {state,dispatch} = useContext(UserContext)
+
+   // state?.watchList?.find((w)=>{if(w.entId==movie?.id){console.log("Watch List is truee")} else {console.log("Watch List is falseeee",w.entId,movie.id)}})
+
+    const addToList = async () => {
+        const result = await fetch('/addtolist',{
+            method: 'put',
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+ localStorage.getItem('jwt')
+            },
+            body:JSON.stringify({
+                id:movie.id,
+                year:movie.release_date.substring(0, 4),
+                name:movie.title,
+                type:'movie',
+                rating:(movie.vote_average%1===0)?movie.vote_average+".0":movie.vote_average
+            })
+        })
+        const data = await result.json()
+        if(data){
+            console.log(data)
+            dispatch({type:"UPDATE",payload:data})
+        }
+    }
 
     const bannerStyle = {
         backgroundImage: `linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(20,20,20,0.8071603641456583) 100%),url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
@@ -19,7 +45,6 @@ function MovieDetails({match}) {
     let imgSrc=`https://image.tmdb.org/t/p/w300`
     let defSrc = 'https://www.movienewz.com/img/films/poster-holder.jpg'
 
-    useEffect(() => {console.log(movie,cast)},[movie,cast])
     useEffect(() => {
         const movieUrl = `https://api.themoviedb.org/3/movie/${match.params.movieId}?api_key=${API_KEY}&append_to_response=videos,credits`
         const fetchMovie = async () => {
@@ -48,7 +73,7 @@ function MovieDetails({match}) {
                         <div className="flex flex-1 flex-col items-center sm:items-start sm:px-5">
                             <span className="m-1 p-2 text-white md:p-5 font-bold text-xl md:text-5xl max-w-3xl font-montserrat">
                                 {movie?.title || movie?.original_title}{" "}
-                                <span>({movie?.release_date.substring(0, 4)})</span>
+                             {movie?.release_date?<span>({movie.release_date.substring(0, 4)})</span>:null}
                             </span>
                             {movie?.runtime !== 0 ? (
                                 <p className="text-white m-1 px-5 text-sm sm:text-xl">
@@ -70,7 +95,12 @@ function MovieDetails({match}) {
                                 })}
                             </div>
                             <div className="m-1 mt-3 md:mt-6 md:mb-3 p-1">
-                                <span className="py-2 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
+                            {state?.watchList?.find((w)=>{if(w.entId==movie.id){return true} else {return false}})
+                                ?
+                                <span className="py-2 px-2 m-2 md:px-5 md:m-4 bg-white text-black ">Added to List</span>
+                                :
+                                <span onClick={addToList} className="py-2 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
+                            }
                             </div>
                             <div className="mt-5 pb-5 sm:m-3 sm:p-3 text-base sm:text-xl text-white font-roboto">
                                 {movie?.overview} 

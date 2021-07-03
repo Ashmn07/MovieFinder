@@ -5,7 +5,7 @@ const User = mongoose.model("User");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "Knicksin7"
-const requireLogin = require('requireLogin')
+const requireLogin = require('./requireLogin')
 
 router.post("/signup",(req,res)=>{
     const {name,email,password} = req.body;
@@ -65,13 +65,13 @@ router.post('/login',(req,res)=>{
 })  
 
 router.put('/addtolist',requireLogin,(req, res)=>{
-    const {name,type,year,rating,id,email} = req.body
-    if(!name|| !type|| !year|| !rating|| !id || !email){
+    const {name,type,year,rating,id} = req.body
+    if(!name|| !type|| !id ){
         res.statusCode = 422;
         return res.json({err:"Data Parsing Error"})
     }
-    User.findOneAndUpdate({email:email},{
-        $push:{watchList:{name,type,rating,year,movieId:id}}
+    User.findByIdAndUpdate(req.user._id,{
+        $push:{watchList:{entName:name,entType:type,entRating:rating,entYear:year,entId:id}}
     },{new:true})
     .then(result=>{
         res.json(result)

@@ -1,6 +1,6 @@
 import React,{useEffect,useContext,createContext,useReducer,Suspense,lazy} from 'react'
 import './App.css';
-// import {reducer,initialState} from './reducer/userReducer'
+import {reducer,initialState} from './reducer/userReducer'
 import {BrowserRouter,Switch,Route,Redirect,useHistory} from 'react-router-dom'
 
 const Signup = lazy(()=>import('./components/Signup'))
@@ -15,16 +15,16 @@ const SearchTV = lazy(()=>import('./components/SearchTV'))
 const MovieDetails = lazy(()=>import('./components/MovieDetails'))
 const TVDetails = lazy(()=>import('./components/TVDetails'))
 
-// export const UserContext = createContext()
+export const UserContext = createContext()
 
 function Routing() {
   const history = useHistory()
-  // const {state,dispatch} = useContext(UserContext)
+  const {state,dispatch} = useContext(UserContext)
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
     if(user){
-      // dispatch({type:"USER",payload:user})
+      dispatch({type:"USER",payload:user})
       console.log(user)
     }
     else{
@@ -65,13 +65,13 @@ function Routing() {
 }
 
 function App(){
-  // const [state,dispatch] = useReducer(reducer,initialState)
+  const [state,dispatch] = useReducer(reducer,initialState)
   return (
-    // <UserContext.Provider value={{state,dispatch}}>
+    <UserContext.Provider value={{state,dispatch}}>
       <BrowserRouter>
         <Routing/>
       </BrowserRouter>
-    // </UserContext.Provider>
+    </UserContext.Provider>
   );
 }
 

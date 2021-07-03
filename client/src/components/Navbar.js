@@ -1,11 +1,11 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {useHistory,Link} from 'react-router-dom'
-// import { UserContext } from '../App'
+import { UserContext } from '../App'
 
 function Navbar() {
     const [show,setShow] = useState(false)
     const history = useHistory()
-    // const {state,dispatch} = useContext(UserContext)
+    const {state,dispatch} = useContext(UserContext)
     
     const navChange = () => {
         if (window.scrollY > 80) {
@@ -25,7 +25,7 @@ function Navbar() {
       const logoutHandler = (e) => {
           e.preventDefault();
           localStorage.clear()
-          // dispatch({type:"CLEAR"})
+          dispatch({type:"CLEAR"})
           history.push('/')
       }
 

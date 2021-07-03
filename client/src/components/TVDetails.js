@@ -1,10 +1,34 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import {UserContext} from '../App'
 
 function TVDetails({match}) {
     const [tv,setTV] = useState()
     const [cast,setCast] = useState()
+    const {state,dispatch} = useContext(UserContext)
+
+    const addToList = async () => {
+        const result = await fetch('/addtolist',{
+            method: 'put',
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+ localStorage.getItem('jwt')
+            },
+            body:JSON.stringify({
+                id:tv.id,
+                year:tv.first_air_date.substring(0, 4),
+                name:tv.name,
+                type:'tv',
+                rating:(tv.vote_average%1===0)?tv.vote_average+".0":tv.vote_average
+            })
+        })
+        const data = await result.json()
+        if(data){
+            console.log(data)
+            dispatch({type:"UPDATE",payload:data})
+        }
+    }
 
     const bannerStyle = {
         backgroundImage: `linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(20,20,20,0.8071603641456583) 100%),url("https://image.tmdb.org/t/p/original/${tv?.backdrop_path}")`,
@@ -70,7 +94,12 @@ function TVDetails({match}) {
                                 })}
                             </div>
                             <div className="m-1 mt-3 md:mt-6 md:mb-3 p-1">
-                                <span className="py-2 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
+                            {state?.watchList?.find((w)=>{if(w.entId==tv.id){return true} else {return false}})
+                                ?
+                                <span className="py-2 px-2 m-2 md:px-5 md:m-4 bg-white text-black ">Added to List</span>
+                                :
+                                <span onClick={addToList} className="py-2 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
+                            }
                             </div>
                             <div className="mt-5 pb-5 sm:m-3 sm:p-3 text-base sm:text-xl text-white font-roboto">
                                 {tv?.overview} 
