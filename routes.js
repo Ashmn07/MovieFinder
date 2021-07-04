@@ -51,8 +51,8 @@ router.post('/login',(req,res)=>{
         .then((match)=>{
             if(match){
                 const token = jwt.sign({_id:saveduser._id},JWT_SECRET)
-                const {_id,name,email} = saveduser
-                res.json({token,user:{_id,name,email}})
+                const {_id,name,email,watchList} = saveduser
+                res.json({token,user:{_id,name,email,watchList}})
             }
             else{
                 res.statusCode = 422;
@@ -65,19 +65,50 @@ router.post('/login',(req,res)=>{
 })  
 
 router.put('/addtolist',requireLogin,(req, res)=>{
-    const {name,type,year,rating,id} = req.body
+    const {name,type,year,rating,id,img} = req.body
     if(!name|| !type|| !id ){
         res.statusCode = 422;
         return res.json({err:"Data Parsing Error"})
     }
+    if(!img){
+        imgSrc=""
+    }
+    else{
+        imgSrc=img
+    }
     User.findByIdAndUpdate(req.user._id,{
-        $push:{watchList:{entName:name,entType:type,entRating:rating,entYear:year,entId:id}}
+        $push:{watchList:{entName:name,entType:type,entRating:rating,entYear:year,entId:id,entPic:imgSrc}}
     },{new:true})
+    .select("-password")
     .then(result=>{
         res.json(result)
     }).catch(err=>{
         return res.status(422).json({error:err})
     })
+})
+
+router.put('/removefromlist',requireLogin,(req, res)=>{
+    const {type,id} = req.body
+    if(!type|| !id ){
+        res.statusCode = 422;
+        return res.json({err:"Data Parsing Error"})
+    }
+    User.findByIdAndUpdate(req.user._id,{
+        $pull:{watchList:{entType:type,entId:id}}
+    },{new:true})
+    .select("-password")
+    .then(result=>{
+        res.json(result)
+    }).catch(err=>{
+        return res.status(422).json({error:err})
+    })
+})
+
+router.get('/watchList',requireLogin,(req,res)=>{
+    User.findById(req.user._id)
+    .select("watchList")
+    .then(result=>{res.json(result)})
+    .catch(err=>{return res.status(422).json({error:err})})
 })
 
 module.exports = router;

@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
         entYear:String,
         entRating:Number,
         entId:String,
+        entPic:String
     }]
 })
 

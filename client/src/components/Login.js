@@ -1,13 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import bgauth from '../images/bg-pop.jpg'
 import {Link,useHistory} from 'react-router-dom'
 import {toast} from 'tailwind-toast'
+import {UserContext} from '../App'
 
 function Login() {
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const history = useHistory()    
+    const history = useHistory()  
+    const {state,dispatch} = useContext(UserContext)  
 
     const loginUser = (e) =>{
         e.preventDefault()
@@ -50,6 +52,7 @@ function Login() {
             else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
+                dispatch({type:"UPDATE",payload:data.user.watchList})
                 toast().success().with({
                     title:'Log in Successful!',
                     message:'',
@@ -57,7 +60,7 @@ function Login() {
                     positionX: 'end',
                     positionY: 'top',
                   }).show()
-                history.push('/home')
+                history.push('/')
             }
         })
     }

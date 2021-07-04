@@ -22,7 +22,27 @@ function MovieDetails({match}) {
                 year:movie.release_date.substring(0, 4),
                 name:movie.title,
                 type:'movie',
-                rating:(movie.vote_average%1===0)?movie.vote_average+".0":movie.vote_average
+                rating:(movie.vote_average%1===0)?movie.vote_average+".0":movie.vote_average,
+                img:imgSrc+movie.poster_path
+            })
+        })
+        const data = await result.json()
+        if(data){
+            console.log(data)
+            dispatch({type:"UPDATE",payload:data.watchList})
+        }
+    }
+
+    const removefromList = async () => {
+        const result = await fetch('/removefromlist',{
+            method: 'put',
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+ localStorage.getItem('jwt')
+            },
+            body:JSON.stringify({
+                id:movie.id,
+                type:'movie',
             })
         })
         const data = await result.json()

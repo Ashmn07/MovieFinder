@@ -29,7 +29,7 @@ function Banner({banner}) {
           </span>
           <div className="m-1 mt-3 mb-1 md:mt-6 md:mb-3 p-1">
           <Link to={`/movie/${banner?.id}`}><span className="py-1 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">More Info</span></Link>
-          <span className="py-1 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
+          {/* <span className="py-1 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span> */}
           </div>
           <div className="m-3 p-3 max-w-lg md:font-semibold text-white">
             {truncate(banner?.overview, 150)} 

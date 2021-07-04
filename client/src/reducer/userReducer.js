@@ -8,10 +8,18 @@ export const reducer = (state,action) => {
         return null
     }
     if(action.type==="UPDATE"){
+        localStorage.setItem("watchList",JSON.stringify(action.payload))
         return {
             ...state,
-            watchList:action.payload.watchList,
+            watchList:action.payload,
         }
     }
+    if(action.type==="UPDATENEW"){
+        return {
+            ...state,
+            watchList:JSON.parse(action.payload)
+        }
+    }
+    console.log(state)
     return state
 }
