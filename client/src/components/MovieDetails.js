@@ -48,7 +48,7 @@ function MovieDetails({match}) {
         const data = await result.json()
         if(data){
             console.log(data)
-            dispatch({type:"UPDATE",payload:data})
+            dispatch({type:"UPDATE",payload:data.watchList})
         }
     }
 
@@ -117,7 +117,7 @@ function MovieDetails({match}) {
                             <div className="m-1 mt-3 md:mt-6 md:mb-3 p-1">
                             {state?.watchList?.find((w)=>{if(w.entId==movie.id){return true} else {return false}})
                                 ?
-                                <span className="py-2 px-2 m-2 md:px-5 md:m-4 bg-white text-black ">Added to List</span>
+                                <span onClick={removefromList} className="py-2 px-2 m-2 md:px-5 md:m-4 bg-white text-black hover:bg-bgButton hover:text-white cursor-pointer">Remove from List</span>
                                 :
                                 <span onClick={addToList} className="py-2 px-2 m-2 md:px-5 md:m-4 bg-bgButton text-white hover:text-black hover:bg-white cursor-pointer">Add To List</span>
                             }
