@@ -22,7 +22,7 @@ function Landing() {
         <div className="bg-white rounded-lg flex h-3/5 w-3/4 md:w-3/4 lg:w-2/3 shadow-2xl">
             <div className="flex w-full">
                 <div className="flex-1 flex flex-col">
-                    <h1 className="align-start text-red-600 font-bold m-3 text-2xl md:text-3xl lg:text-4xl">
+                    <h1 className="align-start text-red-600 font-bold m-3 text-2xl md:text-3xl lg:text-4xl font-kaushan">
                     MovieFinder</h1>
                     <h4 className="text-center font-serif text-lg my-4 py-3 mx-2 px-1 md:text-4xl md:m-7 md:p-7 lg:text-3xl">
                     Do you want to explore the new Movies and TV Shows that have come out?</h4>

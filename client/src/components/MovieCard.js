@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 function MovieCard({detail}) {
     let imgSrc;
-    if(detail.poster_path){
+    if(detail?.poster_path){
       imgSrc =`https://image.tmdb.org/t/p/w300${detail.poster_path}`
     }
     else{

@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
-import {useHistory,Link} from 'react-router-dom'
+import {useHistory,NavLink} from 'react-router-dom'
 import { UserContext } from '../App'
 
 function Navbar() {
@@ -42,13 +42,13 @@ function Navbar() {
                     d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 2h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4zm2 0h1V9h-1v2zm1-4V5h-1v2h1zM5 5v2H4V5h1zm0 4H4v2h1V9zm-1 4h1v2H4v-2z" 
                     clipRule="evenodd" />
                 </svg>
-                <span className="text-center text-red-600 font-bold ml-1 text-lg lg:text-xl">MovieFinder</span>
+                <span className="text-center font-kaushan text-red-600 font-bold ml-1 text-xl md:text-2xl">MovieFinder</span>
               </div>
               <div className="hidden sm:flex items-center space-x-4 md:space-x-2">
-                <Link to="/home"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Home</span></Link>
-                <Link to="/movies"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">Movies</span></Link>
-                <Link to="/tv"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">TV Shows</span></Link>
-                <Link to="/list"><span className="py-3 px-2 text-gray-200 hover:text-white cursor-pointer font-semibold text-sm">My Watch List</span></Link>
+                <NavLink exact to="/home" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 cursor-pointer hover:text-white font-semibold text-base">Home</span></NavLink>
+                <NavLink exact to="/movies" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 hover:text-white cursor-pointer  font-semibold text-base">Movies</span></NavLink>
+                <NavLink exact to="/tv" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 hover:text-white cursor-pointer font-semibold text-base">TV Shows</span></NavLink>
+                <NavLink exact to="/list" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 hover:text-white cursor-pointer font-semibold text-base">My Watch List</span></NavLink>
               </div>
             </div>
             <div className="flex items-center mr-2">

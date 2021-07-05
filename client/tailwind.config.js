@@ -9,6 +9,7 @@ module.exports = {
         sans: ['Comic Sans', ...defaultTheme.fontFamily.sans],
         montserrat: ['Montserrat'],
         roboto:['Roboto'],
+        kaushan:['Kaushan Script']
       },
       colors:{
         bgGray:"#141414",
@@ -23,7 +24,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      listStyleType: ['hover', 'focus'],
+    },
   },
   plugins: [
     require('@tailwindcss/forms'), 
