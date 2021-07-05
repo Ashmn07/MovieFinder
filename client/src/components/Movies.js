@@ -42,7 +42,6 @@ function Movies() {
     const fetchGenres = async () => {
         const result = await fetch(genresUrl)
         const data = await result.json()
-        console.log(data)
         setGenres(data.genres)
     }
     fetchGenres()
@@ -72,14 +71,13 @@ function Movies() {
     return (
         <div className="bg-bgGray h-full w-full min-h-screen">
           <Navbar/> 
-          {/* <Banner banner={banner}/> */}
           <div className="pt-10"/>
           <div className="flex justify-between items-center p-3 mt-8 mx-6 sm:mx-16">
           <span className="font-montserrat text-center tracking-wider block text-white text-lg sm:text-4xl font-extrabold">DISCOVER MOVIES</span>
           <Link to="/searchmovie">
             <div className="flex py-1 px-1 sm:px-3 bg-bgGray border-2 border-red-600 text-red-600  items-center hover:text-bgGray hover:bg-red-600">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6 cursor-pointer stroke-current" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <span className="px-1 sm:px-2 text-sm sm:text-lg cursor-pointer font-semibold">Search</span>
             </div>

@@ -17,7 +17,6 @@ function Home() {
   const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=${page}`
 
   const fetchDetails = async () => {
-    console.log(trendingUrl)
     const result = await fetch(trendingUrl)
     const data = await result.json()
     setPageLimit(data.total_results)

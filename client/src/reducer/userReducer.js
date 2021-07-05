@@ -14,12 +14,5 @@ export const reducer = (state,action) => {
             watchList:action.payload,
         }
     }
-    // if(action.type==="UPDATENEW"){
-    //     return {
-    //         ...state,
-    //         watchList:JSON.parse(action.payload)
-    //     }
-    // }
-    // console.log(state)
     return state
 }

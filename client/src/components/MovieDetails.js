@@ -1,14 +1,13 @@
 import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import {toast} from 'tailwind-toast'
 import { UserContext } from '../App'
 
 function MovieDetails({match}) {
     const [movie,setMovie] = useState()
     const [cast,setCast] = useState()
     const {state,dispatch} = useContext(UserContext)
-
-   // state?.watchList?.find((w)=>{if(w.entId==movie?.id){console.log("Watch List is truee")} else {console.log("Watch List is falseeee",w.entId,movie.id)}})
 
     const addToList = async () => {
         const result = await fetch('/addtolist',{
@@ -27,9 +26,26 @@ function MovieDetails({match}) {
             })
         })
         const data = await result.json()
-        if(data){
-            console.log(data)
+        if(data.err){
+            toast().danger().with({
+                title:'Could not Add',
+                message:`${data.err}`,
+                color:"red",
+                tone:600,
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
+        }
+        else{
             dispatch({type:"UPDATE",payload:data.watchList})
+            toast().success().with({
+                title:'Added to Watch List!',
+                message:'',
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
         }
     }
 
@@ -46,9 +62,26 @@ function MovieDetails({match}) {
             })
         })
         const data = await result.json()
-        if(data){
-            console.log(data)
+        if(data.err){
+            toast().danger().with({
+                title:'Could not Remove',
+                message:`${data.err}`,
+                color:"red",
+                tone:600,
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
+        }
+        else{
             dispatch({type:"UPDATE",payload:data.watchList})
+            toast().success().with({
+                title:'Removed from Watch List!',
+                message:'',
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
         }
     }
 
@@ -58,7 +91,6 @@ function MovieDetails({match}) {
         objectFit:'contain',
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
-        // height:'90vh'
     }
 
     const API_KEY = "d6119874269137f5b378b66f7d37305d";

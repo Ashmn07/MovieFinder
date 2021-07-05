@@ -41,7 +41,6 @@ const pageChangeHandler = (data) =>{
     return (
         <div className="bg-bgGray h-full w-full min-h-screen">
           <Navbar/> 
-          {/* <Banner banner={banner}/> */}
           <div className="pt-10"/>
           <span className="font-montserrat text-center p-3 mt-3 tracking-wider block text-white text-xl sm:text-4xl font-extrabold">SEARCH MOVIES</span>
           <div className="flex justify-center mt-5">
@@ -50,12 +49,11 @@ const pageChangeHandler = (data) =>{
                   <input 
                   className="flex-1 border-none outline-none mx-1 sm:mx-4 px-4 py-2 text-white bg-black" 
                   placeholder="Search Movie" value={search} onChange={e=>setSearch(e.target.value)}
-                  // onSubmit={()=>setPage(1)}
                   />
                 </form>
                 <div className="p-4 w-auto">
-                <svg onClick={searchHandler} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600 cursor-pointer hover:text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg onClick={searchHandler} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600 cursor-pointer hover:text-red-800 stroke-current" fill="none" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 </div>
             </div>

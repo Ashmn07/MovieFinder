@@ -1,6 +1,7 @@
 import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import {toast} from 'tailwind-toast'
 import {UserContext} from '../App'
 
 function TVDetails({match}) {
@@ -25,9 +26,26 @@ function TVDetails({match}) {
             })
         })
         const data = await result.json()
-        if(data){
-            console.log(data)
+        if(data.err){
+            toast().danger().with({
+                title:'Could not Add',
+                message:`${data.err}`,
+                color:"red",
+                tone:600,
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
+        }
+        else{
             dispatch({type:"UPDATE",payload:data.watchList})
+            toast().success().with({
+                title:'Added to Watch List!',
+                message:'',
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
         }
     }
 
@@ -44,9 +62,26 @@ function TVDetails({match}) {
             })
         })
         const data = await result.json()
-        if(data){
-            console.log(data)
+        if(data.err){
+            toast().danger().with({
+                title:'Could not Remove',
+                message:`${data.err}`,
+                color:"red",
+                tone:600,
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
+        }
+        else{
             dispatch({type:"UPDATE",payload:data.watchList})
+            toast().success().with({
+                title:'Removed from Watch List!',
+                message:'',
+                shape: 'square',
+                positionX: 'end',
+                positionY: 'top',
+              }).show()
         }
     }
 
@@ -65,15 +100,14 @@ function TVDetails({match}) {
 
     useEffect(() => {
         const tvUrl = `https://api.themoviedb.org/3/tv/${match.params.tvId}?api_key=${API_KEY}&append_to_response=videos,credits`
-        const fetchMovie = async () => {
+        const fetchTV = async () => {
             const result = await fetch(tvUrl)
             const data = await result.json()
-            console.log(data)
             setTV(data)
             setCast(data.credits.cast)
         }
-        fetchMovie()
-    },[match.params.movieId])
+        fetchTV()
+    },[match.params.tvId])
 
     if (!tv) return(
         <div
