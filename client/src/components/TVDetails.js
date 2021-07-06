@@ -2,7 +2,7 @@ import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import {toast} from 'tailwind-toast'
-import {UserContext} from '../App'
+import {UserContext,API_KEY} from '../App'
 
 function TVDetails({match}) {
     const [tv,setTV] = useState()
@@ -94,7 +94,6 @@ function TVDetails({match}) {
         // height:'90vh'
     }
 
-    const API_KEY = "d6119874269137f5b378b66f7d37305d";
     let imgSrc=`https://image.tmdb.org/t/p/w300`
     let defSrc = 'https://www.tvnewz.com/img/films/poster-holder.jpg'
 
@@ -139,7 +138,7 @@ function TVDetails({match}) {
                                 {tv?.genres.slice(0, 4).map((m, i) => {
                                 return (
                                     <p
-                                    key={m.id * Math.floor(Math.random() * 100)}
+                                    key={i}
                                     className="ml-3"
                                     >
                                     {m.name}

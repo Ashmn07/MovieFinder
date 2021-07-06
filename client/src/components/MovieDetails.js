@@ -2,7 +2,7 @@ import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import {toast} from 'tailwind-toast'
-import { UserContext } from '../App'
+import { UserContext,API_KEY } from '../App'
 
 function MovieDetails({match}) {
     const [movie,setMovie] = useState()
@@ -93,7 +93,6 @@ function MovieDetails({match}) {
         backgroundRepeat: "no-repeat",
     }
 
-    const API_KEY = "d6119874269137f5b378b66f7d37305d";
     let imgSrc=`https://image.tmdb.org/t/p/w300`
     let defSrc = 'https://www.movienewz.com/img/films/poster-holder.jpg'
 
@@ -138,7 +137,7 @@ function MovieDetails({match}) {
                                 {movie?.genres.slice(0, 4).map((m, i) => {
                                 return (
                                     <p
-                                    key={m.id * Math.floor(Math.random() * 100)}
+                                    keyy={i}
                                     className="ml-3"
                                     >
                                     {m.name}

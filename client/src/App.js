@@ -17,6 +17,8 @@ const TVDetails = lazy(()=>import('./components/TVDetails'))
 
 export const UserContext = createContext()
 
+export const API_KEY="d6119874269137f5b378b66f7d37305d"
+
 function Routing() {
   const history = useHistory()
   const {state,dispatch} = useContext(UserContext)

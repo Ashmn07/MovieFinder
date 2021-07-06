@@ -4,6 +4,7 @@ import MovieCard from './MovieCard'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Paging from './Paging'
+import {API_KEY} from '../App'
 
 function Movies() {
 
@@ -13,8 +14,6 @@ function Movies() {
   const [genres,setGenres] = useState([])
   const [selectedGenres,setSelectedGenres] = useState([])
   const [selectedGenresIds,setSelectedGenresIds] = useState('')
-
-  const API_KEY = "d6119874269137f5b378b66f7d37305d";
 
   const fetchDetails = async () => {
     const discoverUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${selectedGenresIds!==''?`&with_genres=${selectedGenresIds}`:''}&language=en-US&sort_by=popularity.desc&page=${page}`

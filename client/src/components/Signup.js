@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import bgauth from '../images/bg-pop.jpg'
-import {Link,useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {toast} from 'tailwind-toast'
 
 function Signup() {
@@ -8,7 +8,6 @@ function Signup() {
     const[name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const history = useHistory()
 
     const createUser = (e) =>{
         e.preventDefault()
@@ -65,7 +64,6 @@ function Signup() {
         backgroundPosition:'center',
         backgroundRepeat:'no-repeat',
         backgroundSize: 'cover',
-        // opacity:0.8
     }
     return (
     <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 h-screen">
@@ -111,18 +109,18 @@ function Signup() {
                         />
                     </div>
                     <div>
-                    <label htmlFor="password"
-                        className="mt-1 block text-sm font-medium text-red-700">
-                        Password    
-                    </label>
-                    <input 
-                    type="password" 
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="form-input rounded-lg my-1 focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700" 
-                    placeholder="Enter Password"
-                    />
+                        <label htmlFor="password"
+                            className="mt-1 block text-sm font-medium text-red-700">
+                            Password    
+                        </label>
+                        <input 
+                        type="password" 
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="form-input rounded-lg my-1 focus:outline-none focus:border-red-700 focus:ring-1 focus:ring-red-700" 
+                        placeholder="Enter Password"
+                        />
                     </div>
                     <button 
                     className="bg-red-500 hover:bg-red-700 text-white rounded mt-4 p-1 w-20"

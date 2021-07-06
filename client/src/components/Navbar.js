@@ -35,6 +35,7 @@ function Navbar() {
         <div className="mx-4 md:mx-6 md:my-1">
           <div className="flex justify-between p-1">
             <div className="flex space-x-8 md:space-x-6">
+            <NavLink exact to="/home">
               <div className="flex items-center py-3 px-3">
                 <svg xmlns="http://www.w3.org/2000/svg"
                  className="h-6 w-6 text-red-600 mr-1 fill-current" viewBox="0 0 20 20">
@@ -44,6 +45,7 @@ function Navbar() {
                 </svg>
                 <span className="text-center font-kaushan text-red-600 font-bold ml-1 text-xl md:text-2xl">MovieFinder</span>
               </div>
+              </NavLink>
               <div className="hidden sm:flex items-center space-x-4 md:space-x-2">
                 <NavLink exact to="/home" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 cursor-pointer hover:text-white font-semibold text-base">Home</span></NavLink>
                 <NavLink exact to="/movies" activeClassName="text-red-500" className="text-gray-200"><span className="py-3 px-2 hover:text-white cursor-pointer  font-semibold text-base">Movies</span></NavLink>

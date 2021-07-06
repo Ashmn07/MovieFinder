@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Banner from './Banner'
 import Footer from './Footer'
 import Paging from './Paging'
+import {API_KEY} from '../App'
 
 function Home() {
 
@@ -12,11 +13,8 @@ function Home() {
   const [details,setDetails] = useState()
   const [banner,setBanner] = useState()
 
-  const API_KEY = "d6119874269137f5b378b66f7d37305d";
-
-  const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=${page}`
-
   const fetchDetails = async () => {
+    const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=${page}`
     const result = await fetch(trendingUrl)
     const data = await result.json()
     setPageLimit(data.total_results)
