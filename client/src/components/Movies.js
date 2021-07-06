@@ -24,10 +24,14 @@ function Movies() {
   }
 
   useEffect(() => {
+    console.log(selectedGenres)
     if(selectedGenres.length>0){
     const tempIds = selectedGenres.map(genres => genres.id)
     const ids = tempIds.reduce((curr,next)=>curr+","+next)
     setSelectedGenresIds(ids)
+    }
+    else if(selectedGenres.length===0){
+      setSelectedGenresIds('')
     }
   },[selectedGenres])
 

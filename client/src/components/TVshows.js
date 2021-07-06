@@ -29,6 +29,9 @@ function TVshows() {
     const ids = tempIds.reduce((curr,next)=>curr+","+next)
     setSelectedGenresIds(ids)
     }
+    else if(selectedGenres.length===0){
+      setSelectedGenresIds('')
+    }
   },[selectedGenres])
 
   useEffect(() => {
