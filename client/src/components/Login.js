@@ -73,9 +73,9 @@ function Login() {
         backgroundSize: 'cover',
     }
     return (
-    <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 h-screen">
+    <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 min-h-screen h-full">
         <div className="bg-white rounded-lg flex h-2/3 w-4/5 md:w-3/4 lg:w-3/4 shadow-2xl">
-            <div className="flex-1 self-center">
+            <div className="flex-1 self-center py-10">
                 <div className="flex-col flex items-center px-3">
                     <svg xmlns="http://www.w3.org/2000/svg"
                      className="h-8 w-8 text-red-600 fill-current" viewBox="0 0 20 20">
