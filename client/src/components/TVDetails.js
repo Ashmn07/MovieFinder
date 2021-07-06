@@ -91,7 +91,6 @@ function TVDetails({match}) {
         objectFit:'contain',
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
-        // height:'90vh'
     }
 
     let imgSrc=`https://image.tmdb.org/t/p/w300`

@@ -71,7 +71,6 @@ function Login() {
         backgroundPosition:'center',
         backgroundRepeat:'no-repeat',
         backgroundSize: 'cover',
-        // opacity:0.8
     }
     return (
     <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 h-screen">
