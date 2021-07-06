@@ -19,9 +19,9 @@ function Landing() {
       },[])
     return (
     <div className="m-0 p-0 flex justify-center items-center bg-gradient-to-bl from-red-400 to-red-900 h-screen">
-        <div className="bg-white rounded-lg flex h-3/5 w-3/4 md:w-3/4 lg:w-2/3 shadow-2xl">
+        <div className="bg-white rounded-lg flex min-h-max w-3/4 md:w-3/4 lg:w-2/3 shadow-2xl">
             <div className="flex w-full">
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex flex-col pt-2 pb-8">
                     <h1 className="align-start text-red-600 font-bold m-3 text-2xl md:text-3xl lg:text-4xl font-kaushan">
                     MovieFinder</h1>
                     <h4 className="text-center font-serif text-lg my-4 py-3 mx-2 px-1 md:text-4xl md:m-7 md:p-7 lg:text-3xl">
