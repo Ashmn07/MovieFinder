@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import bgauth from '../images/bg-pop.jpg'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import {toast} from 'tailwind-toast'
 
 function Signup() {
@@ -8,6 +8,8 @@ function Signup() {
     const[name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+
+    const history = useHistory()
 
     const createUser = (e) =>{
         e.preventDefault()
@@ -53,7 +55,8 @@ function Signup() {
                     shape: 'square',
                     positionX: 'end',
                     positionY: 'top',
-                  }).show()
+                }).show()
+                history.push('/login')
             }
         })
     }

@@ -27,21 +27,6 @@ function Routing() {
     const user = JSON.parse(localStorage.getItem("user"))
     if(user){
       dispatch({type:"USER",payload:user})
-      const getList = async () => {
-        const list = await fetch('/watchList',{
-          method: 'get',
-          headers:{
-              "Content-Type":"application/json",
-              "Authorization":"Bearer "+ localStorage.getItem('jwt')
-          },
-        })
-        const data = await list.json()
-        dispatch({type:"UPDATE",payload:data.watchList})
-      }
-      getList()
-      // if(localStorage.getItem("watchList")){
-      //   dispatch({type:"UPDATENEW",payload:localStorage.getItem("watchList")})
-      // }
     }
     else{
       if(!history.location.pathname.startsWith('/reset')

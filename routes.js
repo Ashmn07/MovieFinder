@@ -104,12 +104,5 @@ router.put('/removefromlist',requireLogin,(req, res)=>{
     })
 })
 
-router.get('/watchList',requireLogin,(req,res)=>{
-    User.findById(req.user._id)
-    .select("watchList")
-    .then(result=>{res.json(result)})
-    .catch(err=>{return res.status(422).json({error:err})})
-})
-
 module.exports = router;
 
