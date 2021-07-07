@@ -3,6 +3,22 @@ Demo : https://moviefinder7.herokuapp.com/
 
 A Web app where you can explore the trending movies and tv shows by searching for them or filtering by genre. You can also explore the details for each movie/tv show and add them to your Watch List for viewing it later. 
 
+## Tools used:
+
+- React
+- React Hooks
+- React Router
+- Local Storage
+- React Context API
+- React Suspense and Lazy
+- Tailwind CSS
+- NodeJs
+- MongoDB
+- Mongoose
+- JWT
+
+## Website Pages Description
+
 ## Landing Page
 
 ![Landing Page](https://res.cloudinary.com/ashcloud/image/upload/v1625653409/Landing_xowbue.png)
@@ -88,11 +104,16 @@ All the Movies added to watch list are displayed here
 
 ![Movie_List](https://res.cloudinary.com/ashcloud/image/upload/v1625655845/WatchMovie_y6zafe.png)
 
+On Clicking the cards they are directed to Movie Details Page where the user can view the details and also remove from watch list if they want to
+
 ### TV Section
 
 All the TV Shows added to watch list are displayed here
 
 ![TV_List](https://res.cloudinary.com/ashcloud/image/upload/v1625655845/WatchTV_z519oc.png)
+
+On Clicking the cards they are directed to TV Details Page where the user can view the details and also remove from watch list if they want to
+
 
 
 
