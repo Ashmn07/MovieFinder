@@ -28,3 +28,21 @@ The user is asked to enter the email and password they entered while signing up
 After a successful login the website is redirected to this page. It displays a banner and also a list of trending movies in that given week. Users can navigate to the various links on the navbar or explore the movies by changing the pages.
 
 ![Home_Page_2](https://res.cloudinary.com/ashcloud/image/upload/v1625653962/Home2_ctr6yb.png)
+
+## Movie Page
+
+![Movie-Page-1](https://res.cloudinary.com/ashcloud/image/upload/v1625654162/Movie_dbpzlv.png)
+
+After clicking on Movie the user can filter the movies by genre or they can search for a movie they want. The selected genres appear at the beginning of the list which is horizontally scrollable. 
+
+### Filter Movies
+
+![Filter Movies](https://res.cloudinary.com/ashcloud/image/upload/v1625654162/Movie2_we1e0m.png)
+
+The resultant movies are displayed which belong to the selected genres
+
+### Search Movies
+
+![Search_Movies](https://res.cloudinary.com/ashcloud/image/upload/v1625654164/MovieSearch_ll0qou.png)
+
+The resultant movies have a part of the searched keyword in the name
