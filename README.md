@@ -76,5 +76,23 @@ After clicking on any TV Show card the user is redirected to this page which dis
 
 ![TV_Detail](https://res.cloudinary.com/ashcloud/image/upload/v1625655417/TVDetails_dwojw3.png)
 
-Now the user can use the add to list functionality and add to watch list and similarly do the opposite i.e removing from the list if it is already added
+Now the user can use the add to list functionality and add to watch list and similarly do the opposite i.e removing from the list if it is already present in the list.
+
+## Watch List
+
+All the Movies/TV shows which have been added to the watch list can be seen here. It is divided into 2 sections Movies and TV shows.
+
+### Movie Section
+
+All the Movies added to watch list are displayed here
+
+![Movie_List](https://res.cloudinary.com/ashcloud/image/upload/v1625655845/WatchMovie_y6zafe.png)
+
+### TV Section
+
+All the TV Shows added to watch list are displayed here
+
+![TV_List](https://res.cloudinary.com/ashcloud/image/upload/v1625655845/WatchTV_z519oc.png)
+
+
 
