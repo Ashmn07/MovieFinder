@@ -104,14 +104,14 @@ function TVshows() {
               <h2 
               key={genre.id}
               onClick={()=>handleGenre(genre)}
-              className="last:pr-24 px-3 py-1 sm:px-4 cursor-pointer text-white rounded-full transition duration-100 transform  bg-gray-600 hover:bg-gray-800"
+              className="px-3 py-1 sm:px-4 cursor-pointer text-white rounded-full transition duration-100 transform  bg-gray-600 hover:bg-gray-800"
               >
                 {genre.name}
               </h2> 
               ))
             }
           </div>
-          <div className="absolute top-0 right-0 bg-gradient-to-l from-bgGray h-20 w-1/6" />
+          <div className="absolute top-0 right-0 bg-gradient-to-l from-bgGray h-20 w-1/12" />
         </div>
           <div className="flex justify-center mb-4">
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
