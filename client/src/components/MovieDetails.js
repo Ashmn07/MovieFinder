@@ -10,7 +10,7 @@ function MovieDetails({match}) {
     const {state,dispatch} = useContext(UserContext)
 
     const addToList = async () => {
-        const result = await fetch('/addtolist',{
+        const result = await fetch('/api/addtolist',{
             method: 'put',
             headers:{
                 "Content-Type":"application/json",
@@ -50,7 +50,7 @@ function MovieDetails({match}) {
     }
 
     const removefromList = async () => {
-        const result = await fetch('/removefromlist',{
+        const result = await fetch('/api/removefromlist',{
             method: 'put',
             headers:{
                 "Content-Type":"application/json",
